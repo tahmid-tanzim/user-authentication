@@ -13,3 +13,5 @@ Passport.js, Node & Express
 OpenID Connect
 
 ### Authentication vs Authorization
+
+npm install --save connect-mongo dotenv express express-session mongoose passport passport-local 
