@@ -7,7 +7,7 @@ const routes = require('./routes');
 const connection = require('./config/database');
 
 // Package documentation - https://www.npmjs.com/package/connect-mongo
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 
 // Need to require the entire Passport config module so app.js knows about it
 require('./config/passport');
@@ -23,15 +23,19 @@ require('dotenv').config();
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 
 /**
  * -------------- SESSION SETUP ----------------
  */
 
-const sessionStore = new MongoStore({
-    mongooseConnection: connection,
+const sessionStore = MongoStore.create({
+    mongoUrl: process.env.DB_STRING,
+    mongoOptions: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    },
     collection: 'sessions'
 });
 
@@ -66,4 +70,6 @@ app.use(routes);
  */
 
 // Server listens on http://localhost:3000
-app.listen(3000);
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
+});

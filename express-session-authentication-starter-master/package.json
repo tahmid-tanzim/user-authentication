@@ -4,20 +4,24 @@
   "description": "A tutorial on session based user authentication using Passport JS",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Tahmid Tanzim",
   "license": "ISC",
   "dependencies": {
-    "bson": ">=1.1.4",
     "connect-mongo": "^4.4.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^5.13.7",
-    "mquery": ">=3.2.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "bson": ">=1.1.4",
+    "mquery": ">=3.2.3",
+    "nodemon": "^2.0.12"
   }
 }
