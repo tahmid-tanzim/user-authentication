@@ -4,7 +4,7 @@ const session = require('express-session');
 const passport = require('passport');
 const crypto = require('crypto');
 const routes = require('./routes');
-const connection = require('./config/database');
+// const connection = require('./config/database');
 
 // Package documentation - https://www.npmjs.com/package/connect-mongo
 const MongoStore = require('connect-mongo');
@@ -56,6 +56,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+    console.log(req.session);
+    console.log(req.user);
+    next();
+});
 
 /**
  * -------------- ROUTES ----------------

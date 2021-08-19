@@ -1,8 +1,12 @@
 const crypto = require('crypto');
 
-// TODO
-function validPassword(password, hash, salt) { }
-function genPassword(password) { }
+module.exports.isValidPassword = (password, hash, salt) => {
+    const verifyHash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
+    return verifyHash === hash;
+};
 
-module.exports.validPassword = validPassword;
-module.exports.genPassword = genPassword;
+module.exports.generatePassword = (password) => {
+    const salt = crypto.randomBytes(32).toString('hex');
+    const generatedHash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
+    return { salt, hash: generatedHash };
+};
