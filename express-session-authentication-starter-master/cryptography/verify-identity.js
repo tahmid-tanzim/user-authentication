@@ -8,7 +8,6 @@ const hash = crypto.createHash(received_data.algorithm);
 const publicKey = fs.readFileSync(__dirname + '/id_rsa_pub.pem', 'utf8');
 
 const decryptedMessage = decrypt.decryptWithPublicKey(publicKey, received_data.signedAndEncryptedData);
-
 const decryptedMessageHex = decryptedMessage.toString();
 
 const hashOfOriginal = hash.update(JSON.stringify(received_data.originalData));
